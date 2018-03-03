@@ -4,6 +4,10 @@
 #include <iostream>
 #include <algorithm>
 
+const char kBase64Alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz"
+    "0123456789+/";
+
 std::vector<int> TextToBinary(std::string text) {
     std::vector<int> output;
     std::reverse(text.begin(), text.end());
@@ -19,30 +23,34 @@ std::vector<int> TextToBinary(std::string text) {
     return output;
 }
 
-void BinaryToText(std::vector<int> binary) {
+std::string BinaryToText(std::vector<int> binary) {
     int totalBytes = binary.size() / 8;
-    std::reverse(binary.begin(), binary.end());
+    std::string text;
 
     for (int i = 0; i < totalBytes; i++) {
-        int sum = 0;
-        for (int j = i * 8, k = 0; j < (i + 1) * 8, k < 8; j++, k++) {
-            std::cout << binary.at(j);
-            sum += binary.at(j) * std::pow(2, k);
+        int asciiValue = 0;
+        for (int j = i * 8, k = 7; j < (i + 1) * 8, k >= 0; j++, k--) {
+            asciiValue += binary.at(j) * std::pow(2, k);
         }
-        std::cout << "\n" << sum; 
-        std::cout << "\n";
+        text.push_back(char(asciiValue));
     }
+
+    return text;
 }
 
 int main() {
-    std::string test = "felipe";
+    std::string text = "felipe";
+    std::vector<int> textToBin;
+    std:: string binToText;
 
-    std::vector<int> output = TextToBinary(test);
+    textToBin = TextToBinary(text);
 
-    for (int i = 0; i < output.size(); i++) {
-        std::cout << output.at(i);
+    for (int i = 0; i < textToBin.size(); i++) {
+        std::cout << textToBin.at(i);
     }
     std::cout << "\n";
 
-    BinaryToText(output);
+    binToText = BinaryToText(textToBin);
+
+    std::cout << binToText << "\n";
 }
