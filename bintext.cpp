@@ -40,7 +40,11 @@ void SliceBinary(std::string text) {
     binary = TextToBinary(text);
 
     std::vector< std::vector<int> > chunks;
-    for (int i = 0; i < (binary.size() / 6); i++) {
+
+    float totalChunks = ceil(binary.size() / 6.0);
+    
+    // initializing the vector of vector<int>
+    for (int i = 0; i < totalChunks; i++) {
         std::vector<int> slice;
         chunks.push_back(slice);
     }
