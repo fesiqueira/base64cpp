@@ -6,8 +6,10 @@
 
 std::vector<int> TextToBinary(std::string);
 
-std::string BinaryToText(std::vector<int>);
+std::vector<int> SliceToDecimal(std::vector< std::vector<int> >);
 
-void SliceBinary(std::string);
+std::vector< std::vector<int> > SliceIntVector(std::vector<int>, float);
+
+void BinaryToText(std::vector<int>);
 
 #endif
