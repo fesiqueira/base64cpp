@@ -3,19 +3,15 @@
 
 int main() {
     std::string text = "felipe";
-    std::vector<int> textToBin;
-    std:: string binToText;
+    std::vector<int> binary;
+    std::vector< std::vector<int> > slices;
 
-    textToBin = TextToBinary(text);
+    binary = TextToBinary(text);
 
-    for (int i = 0; i < textToBin.size(); i++) {
-        std::cout << textToBin.at(i);
+    for (int i = 0; i < binary.size(); i++) {
+        std::cout << binary.at(i);
     }
     std::cout << "\n";
 
-    binToText = BinaryToText(textToBin);
-
-    std::cout << binToText << "\n";
-
-    SliceBinary("felipe");
+    BinaryToText(binary);
 }
