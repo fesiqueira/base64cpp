@@ -1,4 +1,4 @@
-#include <bintext.h>
+#include "bintext.hpp"
 
 const char base64table[] = 
 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

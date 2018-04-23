@@ -1,5 +1,5 @@
-#ifndef BINTEXT_H
-#define BINTEXT_H
+#ifndef BINTEXT_HPP
+#define BINTEXT_HPP
 
 #include <vector>
 #include <string>
