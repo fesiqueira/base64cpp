@@ -10,6 +10,8 @@ std::vector<int> SliceToDecimal(std::vector< std::vector<int> >);
 
 std::vector< std::vector<int> > SliceIntVector(std::vector<int>, float);
 
-void BinaryToText(std::vector<int>);
+std::string BinaryToText(std::vector<int>);
+
+void Encode(std::string);
 
 #endif
