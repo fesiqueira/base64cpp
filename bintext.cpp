@@ -4,6 +4,11 @@
 #include <iostream>
 #include <algorithm>
 
+const char base64table[] = 
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"abcdefghijklmnopqrstuvwxyz"
+"0123456789+/";
+
 std::vector<int> TextToBinary(std::string text) {
     std::vector<int> output;
     std::reverse(text.begin(), text.end());
@@ -62,6 +67,11 @@ std::vector< std::vector<int> > SliceIntVector(std::vector<int> vctr, float slic
     return slices;
 }
 
+std::vector< std::vector<int> > BinaryTo6BitChunks(std::vector<int> binary) {
+    return SliceIntVector(binary, 6);
+    // return chunks;
+}
+
 std::string BinaryToText(std::vector<int>  binary) {
     std::string text;
     std::vector<int> asciiSlice;
@@ -78,12 +88,7 @@ std::string BinaryToText(std::vector<int>  binary) {
     return text;
 }
 
-const char base64table[] = 
-"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-"abcdefghijklmnopqrstuvwxyz"
-"0123456789+/";
-
-bool NormalizeSlice(std::vector< std::vector<int> >* slices) {
+bool FixLastChunk(std::vector< std::vector<int> >* slices) {
     if (slices->back().size() == 6) {
         return false;
     }
@@ -91,4 +96,22 @@ bool NormalizeSlice(std::vector< std::vector<int> >* slices) {
         slices->back().push_back(0);
     }
     return true;
+}
+
+std::string EncodeToBase64(std::vector< std::vector<int> > chunks, bool needToFix) {
+    std::string encoded;
+    std::vector<int> decimals = SliceToDecimal(chunks);
+    
+    for (int i = 0; i < decimals.size(); i++) {
+        encoded.push_back(base64table[decimals.at(i)]);
+    }
+
+    if (needToFix) {
+        encoded.push_back('=');
+        if (encoded.length() < 4) {
+            encoded.push_back('=');
+        }
+    }
+
+    return encoded;
 }
