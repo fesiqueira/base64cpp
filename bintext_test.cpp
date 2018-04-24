@@ -26,7 +26,3 @@ TEST_CASE("Convert text to binary", "[BinaryToText]") {
         REQUIRE(BinaryToText(tests.at(i).binary) == tests.at(i).text);
     }
 }
-
-TEST_CASE("Encode string to base64", "[Encode]") {
-    Encode("1");
-}

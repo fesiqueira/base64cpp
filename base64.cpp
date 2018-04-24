@@ -11,8 +11,24 @@ public:
     std::string decode(std::string); 
 };
 
-std::string Base64::encode(std::string msg) {
-    std::vector<int> binaryMsg;
+std::string Encode(std::string text) {
+    std::vector<int> binary = TextToBinary(text);
+    std::vector< std::vector<int> > slices = SliceIntVector(binary, 6);
+    std::string encoded;
 
-    binaryMsg = TextToBinary(msg);
+    bool isNormalized = NormalizeSlice(&slices);
+    
+    std::vector<int> decimal = SliceToDecimal(slices);
+    for (int i = 0; i < decimal.size(); i++) {
+        encoded.push_back(base64table[decimal.at(i)]);
+    }
+
+    if (isNormalized) {
+        encoded.push_back('=');
+        if (encoded.length() < 4) {
+            encoded.push_back('=');
+        }
+    }
+
+    return encoded;
 }

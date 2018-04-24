@@ -83,19 +83,12 @@ const char base64table[] =
 "abcdefghijklmnopqrstuvwxyz"
 "0123456789+/";
 
-void Encode(std::string text) {
-    std::vector<int> binary = TextToBinary(text);
-    std::vector< std::vector<int> > slices = SliceIntVector(binary, 6);
-    std::vector<int> decimals = SliceToDecimal(slices);
-
-    for (int i = 0; i < slices.size(); i++) {
-        for (int j = 0; j < slices.at(i).size(); j++) {
-            std::cout << slices.at(i).at(j);
-        }
-        std::cout << "\n";
+bool NormalizeSlice(std::vector< std::vector<int> >* slices) {
+    if (slices->back().size() == 6) {
+        return false;
     }
-
-    for (int i = 0; i < decimals.size(); i++) {
-        std::cout << base64table[decimals.at(i)] << "\n";
+    while(slices->back().size() < 6) {
+        slices->back().push_back(0);
     }
+    return true;
 }

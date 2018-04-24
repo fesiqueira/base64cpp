@@ -12,6 +12,6 @@ std::vector< std::vector<int> > SliceIntVector(std::vector<int>, float);
 
 std::string BinaryToText(std::vector<int>);
 
-void Encode(std::string);
+bool NormalizeSlice(std::vector< std::vector<int> >*);
 
 #endif
